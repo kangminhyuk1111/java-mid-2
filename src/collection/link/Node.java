@@ -9,15 +9,6 @@ public class Node {
         this.item = item;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Node{" +
-//                "item=" + item +
-//                ", next=" + next +
-//                '}';
-//    }
-
-    // [A->B->C]
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
