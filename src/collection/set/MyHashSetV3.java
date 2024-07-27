@@ -3,21 +3,21 @@ package collection.set;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class MyHashSetV2 {
+public class MyHashSetV3<E> implements MySet<E> {
 
     static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    private LinkedList<Object>[] buckets;
+    private LinkedList<E>[] buckets;
 
     private int size = 0;
     private int capacity = DEFAULT_INITIAL_CAPACITY;
 
-    public MyHashSetV2() {
+    public MyHashSetV3() {
         buckets = new LinkedList[capacity];
         initBuckets(capacity);
     }
 
-    public MyHashSetV2(int capacity) {
+    public MyHashSetV3(int capacity) {
         this.capacity = capacity;
         buckets = new LinkedList[capacity];
         initBuckets(capacity);
@@ -29,9 +29,9 @@ public class MyHashSetV2 {
         }
     }
 
-    public boolean add(Object value) {
+    public boolean add(E value) {
         int hashIndex = hashIndex(value);
-        final LinkedList<Object> bucket = buckets[hashIndex];
+        final LinkedList<E> bucket = buckets[hashIndex];
 
         if (bucket.contains (value)) {
             return false;
@@ -43,15 +43,15 @@ public class MyHashSetV2 {
         return true;
     }
 
-    public boolean contains(Object searchValue) {
+    public boolean contains(E searchValue) {
         final int hashIndex = hashIndex(searchValue);
-        final LinkedList<Object> bucket = buckets[hashIndex];
+        final LinkedList<E> bucket = buckets[hashIndex];
         return bucket.contains(searchValue);
     }
 
-    public boolean remove(Object value) {
+    public boolean remove(E value) {
         final int hashIndex = hashIndex(value);
-        final LinkedList<Object> bucket = buckets[hashIndex];
+        final LinkedList<E> bucket = buckets[hashIndex];
         // 일반 int로 하면 index를 지움, 값으로 지울려면 래퍼 클래스 사용
         final boolean remove = bucket.remove(value);
 
@@ -64,7 +64,7 @@ public class MyHashSetV2 {
 
     }
 
-    private int hashIndex(Object value) {
+    private int hashIndex(E value) {
         int hashCode = value.hashCode();
         return Math.abs(hashCode) % capacity;
     }
